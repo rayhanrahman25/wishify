@@ -17,21 +17,18 @@ use Illuminate\Support\Facades\Route;
 
 Route::get('/login', function () {
     if (Auth::user()) {
-        return redirect()->route('dashboard');
+        return redirect()->route('home');
     }
     return view('login');
 })->name('login');
 
 Route::middleware(['verify.shopify'])->group(function () {
-
-
-
+   
 });
 
 Route::get('/', function () {
     return view('dashboard');
-})->name('dashboard');
-
+})->name('home');
 Route::get('/products', function () {
     return view('products');
 })->name('products');
@@ -43,4 +40,6 @@ Route::get('/customers', function () {
 Route::get('/settings', function () {
     return view('settings');
 })->name('settings');
+
+
 
