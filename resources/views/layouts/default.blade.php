@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -14,7 +15,7 @@
     @yield('title')
      
          <main>
-           @yield('main')
+           @yield('content')
          </main>
      </div>
 </body>
