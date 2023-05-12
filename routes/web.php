@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\SettingsController;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Route;
@@ -37,11 +38,9 @@ Route::middleware(['verify.shopify'])->group(function () {
         return view('settings');
     })->name('settings');
 
-    Route::get('/test', function () {
-        $shop = Auth::user();
-        print_r($shop);
-        return;
-    })->name('test');
+    Route::controller(SettingsController::class)->group(function () { 
+        Route::post('/configure-theme', 'configureTheme')->name('theme.configuration');
+    });
     
 });
 
