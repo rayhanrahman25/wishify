@@ -1,4 +1,4 @@
-<div x-data={open:true,progress:false} x-show="open" class="relative z-10" aria-labelledby="modal-title" role="dialog" aria-modal="true">
+<div x-data={open:true,progress:false} x-show="open" id="theme-configure-modal" class="relative z-10" aria-labelledby="modal-title" role="dialog" aria-modal="true">
 
     <div class="fixed inset-0 bg-gray-500 bg-opacity-75 transition-opacity"></div>
   
@@ -22,8 +22,8 @@
             </div>
           </div>
           <div class="bg-gray-50 px-4 py-3 sm:flex sm:flex-row-reverse sm:px-6">
-            <button @click="progress=true; setupTheme();" type="button" class="inline-flex w-full justify-center rounded-md bg-green-600 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-green-500 sm:ml-3 sm:w-auto">
-              <span x-show="progress" class="pr-2">@include('partials.spinner')</span>
+            <button @click="progress=true; configureTheme();" type="button" class="inline-flex w-full justify-center rounded-md bg-green-600 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-green-500 sm:ml-3 sm:w-auto">
+              <span x-show="progress" class="pr-2" id="loader">@include('partials.spinner')</span>
               Configure
             </button>
             <button @click="open=false" type="button" class="mt-3 inline-flex w-full justify-center rounded-md bg-white px-3 py-2 text-sm font-semibold text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 hover:bg-gray-50 sm:mt-0 sm:w-auto">Cancel</button>

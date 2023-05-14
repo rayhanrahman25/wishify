@@ -13,7 +13,8 @@ return new class extends Migration
     {
         Schema::create('settings', function (Blueprint $table) {
             $table->id();
-            $table->boolean('activated');
+            $table->string("shop_name")->nullable();
+            $table->boolean('activated')->nullable();
             $table->timestamps();
         });
     }

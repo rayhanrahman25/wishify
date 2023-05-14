@@ -41,11 +41,11 @@ class SettingsController extends Controller
         $shop->api()->rest('PUT', '/admin/themes/'.$active_theme_id.'/assets.json', $crate_a_file);
 
         // save data into database
-        // Settings::updateOrCreate(
-        //     ['shop_id' => $shop->name ],
-        //     ['activated' => true]
-        // );
-        return ['message' => 'Theme configured succesfully'];
+        Settings::updateOrCreate([
+            'shop_name' => $shop->name,
+            'activated' => true,
+        ]);
+        echo json_encode(["message" => 'configured']);
     }
 
     /**
