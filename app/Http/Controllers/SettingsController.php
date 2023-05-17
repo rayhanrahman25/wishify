@@ -40,6 +40,15 @@ class SettingsController extends Controller
         $crate_a_file = array('asset' => array('key' => 'snippets/wishify-app.liquid', 'value' => $snippet));
         $shop->api()->rest('PUT', '/admin/themes/'.$active_theme_id.'/assets.json', $crate_a_file);
 
+        // --- load app script to the shopify store
+
+        $shop->api()->rest('POST', '/admin/api/2023-01/script_tags.json', [
+            'script_tag' => [
+                'event' => 'onload',
+                'src' => 'https://wishify.test/js/wishify.js',
+            ],
+        ]);
+
         // save data into database
         Settings::updateOrCreate([
             'shop_name' => $shop->name,
