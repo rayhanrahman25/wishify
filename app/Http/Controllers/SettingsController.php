@@ -23,25 +23,8 @@ class SettingsController extends Controller
     {
 
         $shop = Auth::user();
-        $themes = $shop->api()->rest('GET', '/admin/themes.json');
-
-        //---- Get active theme id ----
-        $active_theme_id = "";
-        foreach($themes['body']->container['themes'] as $theme) {
-            if( "main" ===$theme['role']){
-            $active_theme_id = $theme['id'];
-            }
-        }
-
-        //---- Code snippet that you want to store in theme 
-        $snippet = "Your snippet code updated";
-
-        //---- Data to pass to our rest api request ----
-        $crate_a_file = array('asset' => array('key' => 'snippets/wishify-app.liquid', 'value' => $snippet));
-        $shop->api()->rest('PUT', '/admin/themes/'.$active_theme_id.'/assets.json', $crate_a_file);
-
+        
         // --- load app script to the shopify store
-
         $shop->api()->rest('POST', '/admin/api/2023-01/script_tags.json', [
             'script_tag' => [
                 'event' => 'onload',

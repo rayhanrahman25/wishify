@@ -37,8 +37,8 @@ Route::middleware(['verify.shopify'])->group(function () {
         return view('customers');
     })->name('customers');
     
-    Route::get('/settings', function () { 
-        return view('settings');
+    Route::get('/settings', function (){
+       return view('settings');
     })->name('settings');
 
     Route::controller(SettingsController::class)->group(function () { 

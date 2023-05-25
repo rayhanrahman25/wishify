@@ -5,7 +5,7 @@
 @section('content')
 <div class="max-w-7xl mx-auto py-6 sm:px-6 lg:px-8">
   <div id="wrapper" class="container px-4 py-4 mx-auto">
-      @if(!$settings->activated)
+      @if(!$settings)
       @include('partials.active-modal')
       @endif
       <div class="sm:grid sm:h-32 sm:grid-flow-row sm:gap-4 sm:grid-cols-3">

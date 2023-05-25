@@ -1,3 +1,15 @@
-body{
-    color: red;
+button.add-to-whislist {
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
+    border: 1px solid #000000;
+    padding: 1rem 12.6rem;
+    cursor: pointer;
+    font: inherit;
+    font-size: 1.5rem;
+    text-decoration: none;
+    color: #000000;
+    appearance: none;
+    background-color: #ffffff;
+    margin-top: -20px;
 }
