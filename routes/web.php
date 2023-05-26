@@ -34,6 +34,7 @@ Route::middleware(['verify.shopify'])->group(function () {
     })->name('products');
     
     Route::get('/customers', function () {
+        
         return view('customers');
     })->name('customers');
     
