@@ -20,5 +20,5 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 });
 
 Route::controller(WishlistController::class)->group(function () { 
-    Route::post('/check-wishlist/', 'check_wishlist')->name('check.wishlist');
+    Route::post('/check-wishlist', 'check_wishlist')->name('check.wishlist');
 });

@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Wishlist;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class WishlistController extends Controller
 {
@@ -33,16 +34,21 @@ class WishlistController extends Controller
 
     public function check_wishlist(Request $request)
     {
-        // $wishify_secret = config('e3581355119c3ee0019ddc39622ce44b');
-        // $wishify_hmac_header = $request->header('x-shopify-hmac-sha256');
-        // $wishify_requested_data = $request->getContent();
-        // $wishify_hmac = base64_encode(hash_hmac('sha256', $wishify_requested_data, $wishify_secret, true));
-        // if ($wishify_hmac_header !== $wishify_hmac) {
-        //     // Invalid request, HMAC doesn't match
-        //     return response()->json(['error' => 'Invalid request.']);
-        // }
 
-        echo json_encode(["message" => "success"]); 
+        $validate = $request->validate([
+            'shop_id' => 'string',
+            'customer_id' => 'string',
+            'product_id' => 'string',
+        ]);
+
+        // store wishlist
+        Wishlist::create([
+            'shop_id' => $validate['shop_id'],
+            'customer_id' => $validate['customer_id'],
+            'product_id' => $validate['product_id'],
+        ]);
+
+        echo json_encode(["message" =>  "Product added to wishlist successfully"]); 
         
     }
 
