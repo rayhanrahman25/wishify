@@ -24,15 +24,26 @@ class WishlistController extends Controller
         //
     }
 
-    private function verifyHmac($data, $hmacHeader)
+    public function check_wishlist(Request $request)
     {
-        $secret = config('shopify.shared_secret'); // Replace with your Shopify secret
-        $calculatedHmac = base64_encode(hash_hmac('sha256', $data, $secret, true));
+        $validate = $request->validate([
+            'shop_id' => 'string',
+            'customer_id' => 'string',
+            'product_id' => 'string',
+        ]);
 
-        return hash_equals($hmacHeader, $calculatedHmac);
+        $wishlist = Wishlist::where('shop_id', $validate['shop_id'])
+        ->where('product_id', $validate['product_id'])
+        ->where('customer_id', $validate['customer_id'])->first();
+
+        if(!$wishlist){
+            echo json_encode(["wishlist_not_exist" =>  "No wishlist found"]); 
+        }
+        echo json_encode(["wishlist_exist" =>  "Product added to wishlist successfully"]); 
+
     }
 
-    public function check_wishlist(Request $request)
+    public function add_wishlist(Request $request)
     {
 
         $validate = $request->validate([
@@ -50,6 +61,22 @@ class WishlistController extends Controller
 
         echo json_encode(["message" =>  "Product added to wishlist successfully"]); 
         
+    }
+
+    public function remove_wishlist(Request $request)
+    {
+        $validate = $request->validate([
+            'shop_id' => 'string',
+            'customer_id' => 'string',
+            'product_id' => 'string',
+        ]);
+
+        Wishlist::where('shop_id', $validate['shop_id'])
+        ->where('product_id', $validate['product_id'])
+        ->where('customer_id', $validate['customer_id'])
+        ->delete();
+
+        echo json_encode(["message" =>  "Remove from wishlist"]);
     }
 
     /**
