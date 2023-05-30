@@ -6,7 +6,7 @@ document.head.appendChild(link);
     
 var currentUrl = window.location.href;
 
-// Check if the current URL matches the desired pattern
+// // Check if the current URL matches the desired pattern
 if (currentUrl.match(/\/products\/.*$/)) {
 
     function checkWishlist(shop_id, product_id, customer_id)
@@ -40,7 +40,7 @@ if (currentUrl.match(/\/products\/.*$/)) {
 
     }
 
-    function wishifyButton(shop_id, product_id, customer_id) 
+    function addToWishlist(shop_id, product_id, customer_id) 
     {
       const url = 'https://wishify.test/api/add-to-wishlist';
 
@@ -95,7 +95,7 @@ if (currentUrl.match(/\/products\/.*$/)) {
     checkWishlist(shop_id, product_id, customer_id);
     // add to wishlist
     wishifyButton.addEventListener('click', function() {
-      wishifyButton(shop_id, product_id, customer_id);
+      addToWishlist(shop_id, product_id, customer_id);
     });
 
     // remove wishlist
