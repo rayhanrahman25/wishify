@@ -38,9 +38,9 @@ class WishlistController extends Controller
 
         if(!$wishlist){
             echo json_encode(["wishlist_not_exist" =>  "No wishlist found"]); 
-        }
+        }else{
         echo json_encode(["wishlist_exist" =>  "Product added to wishlist successfully"]); 
-
+        }
     }
 
     public function add_wishlist(Request $request)

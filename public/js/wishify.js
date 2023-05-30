@@ -9,6 +9,8 @@ var currentUrl = window.location.href;
 // // Check if the current URL matches the desired pattern
 if (currentUrl.match(/\/products\/.*$/)) {
 
+  let wishify_id = document.getElementById("wishify");
+
     function checkWishlist(shop_id, product_id, customer_id)
     {
 
@@ -26,11 +28,10 @@ if (currentUrl.match(/\/products\/.*$/)) {
         .then(response => response.json())
         .then(data => {
           if(data.wishlist_exist){
-            let wishify_id = document.getElementById("wishify");
             wishify_id.classList.remove("add-to-wishify");
-            wishify_id.classList.add("remove-wishlist");
             wishifyButton.innerHTML = "Remove Wishlist";
           }else{
+            wishify_id.classList.remove("remove-wishlist");
             wishifyButton.innerHTML = "Add to Wishlist";
           }
         })
@@ -55,6 +56,8 @@ if (currentUrl.match(/\/products\/.*$/)) {
       fetch(url, requestOptions)
         .then(response => response.json())
         .then(data => {
+          wishify_id.classList.remove("add-to-wishify");
+          wishify_id.classList.add("remove-wishlist");
           wishifyButton.innerHTML = "Added to Wishlist";
         })
         .catch(error => {
@@ -78,6 +81,8 @@ if (currentUrl.match(/\/products\/.*$/)) {
       fetch(url, requestOptions)
         .then(response => response.json())
         .then(data => {
+          wishify_id.classList.remove("remove-wishlist");
+          wishify_id.classList.add("add-to-wishlist");
           wishifyButton.innerHTML = "Added to Wishlist";
         })
         .catch(error => {
@@ -93,6 +98,7 @@ if (currentUrl.match(/\/products\/.*$/)) {
     let customer_id = wishifyButton.getAttribute('data-customer');
 
     checkWishlist(shop_id, product_id, customer_id);
+
     // add to wishlist
     wishifyButton.addEventListener('click', function() {
       addToWishlist(shop_id, product_id, customer_id);
@@ -102,6 +108,6 @@ if (currentUrl.match(/\/products\/.*$/)) {
     removeWishlist.addEventListener('click', function() {
       removeFromWishlist(shop_id, product_id, customer_id);
     });
-    
+
 }
   
