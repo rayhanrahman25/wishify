@@ -97,16 +97,27 @@ if (currentUrl.match(/\/products\/.*$/)) {
     let product_id = wishifyButton.getAttribute('data-product');
     let customer_id = wishifyButton.getAttribute('data-customer');
 
+    // delete remove wishlist if customer_id is not available
+    if(!customer_id){
+      wishify_id.classList.remove("remove-wishlist");
+    }
+    // check wishlist 
+    if(customer_id){
     checkWishlist(shop_id, product_id, customer_id);
-
+    }
     // add to wishlist
     wishifyButton.addEventListener('click', function() {
-      addToWishlist(shop_id, product_id, customer_id);
+      if(customer_id){
+        addToWishlist(shop_id, product_id, customer_id);
+      }
+      wishifyButton.innerHTML = "Added to Wishlist";
     });
 
     // remove wishlist
     removeWishlist.addEventListener('click', function() {
+      if(customer_id){
       removeFromWishlist(shop_id, product_id, customer_id);
+      }
     });
 
 }
