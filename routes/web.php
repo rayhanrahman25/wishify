@@ -29,11 +29,9 @@ Route::middleware(['verify.shopify'])->group(function () {
     Route::get('/', function () {
         $shop = Auth::user();
         $settings = Settings::where("shop_name", $shop->name)->first();
-        $get_wishlist = Wishlist::selectRaw(' COUNT(created_at) as total,
-        COUNT(CASE WHEN DATE(created_at) = CURDATE() THEN 1 END) as today,
+        $get_wishlist = Wishlist::selectRaw('COUNT(*) as total,
+         COUNT(CASE WHEN DATE(created_at) = CURDATE() THEN 1 END) as today,
         COUNT(CASE WHEN DATE(created_at) = CURDATE() - INTERVAL 1 DAY THEN 1 END) as yesterday')
-        ->groupBy(DB::raw('DATE(created_at)'))
-        ->get()
         ->first();
         return view('dashboard', compact(['settings','get_wishlist']));
     })->name('home');
@@ -43,7 +41,6 @@ Route::middleware(['verify.shopify'])->group(function () {
     })->name('products');
     
     Route::get('/customers', function () {
-        
         return view('customers');
     })->name('customers');
     

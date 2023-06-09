@@ -11,7 +11,7 @@
       <div class="sm:grid sm:h-32 sm:grid-flow-row sm:gap-4 sm:grid-cols-3">
          <x-status type="positive" title="Today's wishists" number=" {{ $get_wishlist->today ?? 0 }} "  growth="9" />
          <x-status type="negative" title="Yesterday's wislists" number=" {{ $get_wishlist->yesterday ?? 0 }} " growth="20"  />
-         <x-status type="normal" title="Total wislists" number=" {{$get_wishlist->total ?? 0}} " growth="0" />
+         <x-status type="normal" title="Total wislists" number=" {{ $get_wishlist->total ?? 0 }} " growth="0" />
       </div>
  </div>
  </div>
