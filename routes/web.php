@@ -1,5 +1,7 @@
 <?php
 
+use App\Http\Controllers\DashboardController;
+use App\Http\Controllers\ProductsController;
 use App\Http\Controllers\SettingsController;
 use App\Models\Settings;
 use App\Models\Wishlist;
@@ -26,31 +28,22 @@ Route::get('/login', function () {
 
 Route::middleware(['verify.shopify'])->group(function () {
 
-    Route::get('/', function () {
-        $shop = Auth::user();
-        $settings = Settings::where("shop_name", $shop->name)->first();
-        $get_wishlist = Wishlist::selectRaw('COUNT(*) as total,
-         COUNT(CASE WHEN DATE(created_at) = CURDATE() THEN 1 END) as today,
-        COUNT(CASE WHEN DATE(created_at) = CURDATE() - INTERVAL 1 DAY THEN 1 END) as yesterday')
-        ->first();
-        return view('dashboard', compact(['settings','get_wishlist']));
-    })->name('home');
+    Route::controller(DashboardController::class)->group(function(){
+        Route::get('/', 'index')->name('home');
+    });
 
-    Route::get('/products', function () {
-        return view('products');
-    })->name('products');
-    
+    Route::controller(ProductsController::class)->group(function(){
+        Route::get('/products', 'index')->name('products');
+    });
+
+    Route::controller(SettingsController::class)->group(function () { 
+        Route::get('/settings', 'index')->name('settings');
+        Route::post('/configure-theme', 'configureTheme')->name('theme.configuration');
+    });
+
     Route::get('/customers', function () {
         return view('customers');
     })->name('customers');
-    
-    Route::get('/settings', function (){
-       return view('settings');
-    })->name('settings');
-
-    Route::controller(SettingsController::class)->group(function () { 
-        Route::post('/configure-theme', 'configureTheme')->name('theme.configuration');
-    });
     
 });
 
