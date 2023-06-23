@@ -21,7 +21,7 @@ Route::get('/login', function () {
     return view('login');
 })->name('login');
 
-Route::middleware(['verify.shopify'])->group(function () {
+Route::middleware(['verify.shopify','billable'])->group(function () {
 
     Route::controller(DashboardController::class)->group(function(){
         Route::get('/', 'index')->name('home');
