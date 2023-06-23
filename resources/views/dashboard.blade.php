@@ -35,8 +35,9 @@
             url: '{{ route("theme.configuration") }}',
             type: 'POST',
             success: function(response) {
-                // Handle the success response
-                alert("C");
+              document.getElementById('configure-btn').remove();
+              document.getElementById('modal-title').innerHTML = "Theme Successfully Configured";
+              document.getElementById('modal-description').innerHTML = "Wishify Configured your theme successfully";
             },
             error: function(xhr) {
                 // Handle the error response
